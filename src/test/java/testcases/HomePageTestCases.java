@@ -39,7 +39,6 @@ public class HomePageTestCases extends BaseClass {
         boolean flag = homePage.IsUserOnHomePage();
         Assert.assertTrue(flag, "User is not on Home Page");
 
-
         clickOnElement(homePage.amountHeader);  //Will click on Amount header of transaction table
 
 
@@ -50,7 +49,7 @@ public class HomePageTestCases extends BaseClass {
         List<Double> actualAmountListInDecimal = new ArrayList<>();
 
         for (WebElement am : amounts) {
-            String st = am.getText();
+            String st = am.getText(); // - 320.00 USD
 
             String st1 = st.replace(" USD", "");  //- 320.00
 

@@ -37,7 +37,23 @@ public class LoginPageTestCases extends BaseClass {
 
         String actualMessage = loginPage.passwordAlert.getText();
         Assert.assertEquals(actualMessage, loginPage.errorMessageWhenNoPassword, "Expected Error Message is not appeared");
+    }
 
+    @Test(description = "This TC will verify Remember me check box is by default unchecked and then tick the checkbox", priority = 3, enabled = true)
+    public void verifyCheckBoxForRememberMe() throws InterruptedException {
+        boolean flag = loginPage.IsUserOnLoginPage();
+        Assert.assertTrue(flag, "User is not on Login Page");
+
+        waitForElementVisibleAndClickable(driver, loginPage.rememberMeCheckBox);
+        Boolean check = loginPage.rememberMeCheckBox.isSelected();
+
+        Assert.assertFalse(check, "Remember Me Check box is selected by default");
+
+        clickOnElement(loginPage.rememberMeCheckBox);
+
+        Boolean checkAfter = loginPage.rememberMeCheckBox.isSelected();
+
+        Assert.assertTrue(checkAfter, "Remember Me Check box is not getting selected");
     }
 
     @AfterMethod(alwaysRun = true)

@@ -1,5 +1,6 @@
 package base;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -35,7 +36,6 @@ public class BaseClass {
             prop = new Properties();
             FileInputStream fis = new FileInputStream(propertyFilePath);
             prop.load(fis);
-
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
             logger.error("File not found Exception");
@@ -52,6 +52,7 @@ public class BaseClass {
                 logger.info("Firefox driver created");
                 break;
             case "CHROME":
+                WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.setAcceptInsecureCerts(true);
                 options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.IGNORE);
@@ -83,14 +84,14 @@ public class BaseClass {
         driver.get(prop.getProperty("url"));
     }
 
-    public void clickOnElement(WebElement ele) throws Exception
+    public void clickOnElement(WebElement ele)
     {
         waitForElementVisibleAndClickable(driver,ele);
         ele.click();
     }
 
     //Entering text in text box
-    public void sendKeys(WebElement ele, String testData) throws InterruptedException
+    public void sendKeys(WebElement ele, String testData) 
     {
         waitForVisibilityOfElement(driver,ele);
         ele.clear();

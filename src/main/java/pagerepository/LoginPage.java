@@ -25,12 +25,15 @@ public class LoginPage extends BaseClass {
     @FindBy(xpath="//div[starts-with(@id, 'random_id')]")
     public WebElement passwordAlert;
 
+    @FindBy(css = "label.form-check-label>input")
+    public WebElement rememberMeCheckBox;
+
     public boolean IsUserOnLoginPage(){
         waitForElementVisible(driver, loginButton);
         return loginButton.isDisplayed();
     }
 
-    public void loginToApplication(String userName, String password) throws Exception {
+    public void loginToApplication(String userName, String password){
         sendKeys(userNameTextBox, userName);
         sendKeys(passwordTextBox, password);
         clickOnElement(loginButton);
